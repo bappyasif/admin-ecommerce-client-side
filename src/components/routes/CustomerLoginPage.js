@@ -14,7 +14,7 @@ function CustomerLoginPage() {
     }
 
     const handleLogin = (data) => {
-        const url = `${appCtx.baseUrl}/accecss-tokens`;
+        const url = `${appCtx.baseUrl}/access-tokens`;
         // console.log(data?.user?.mobileNumber, "!!", data)
 
         sendDataToServer(url, {digits: `${data.user.mobileNumber}`}, handleJwt)

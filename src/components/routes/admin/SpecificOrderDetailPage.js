@@ -11,7 +11,7 @@ function SpecificOrderDetailPage() {
 
     const url = `${appCtx.baseUrl}/all-orders/${params.orderId}`;
 
-    const { dataset } = useToFetchSectionSpecificDataForAdmin(url)
+    const { dataset } = useToFetchSectionSpecificDataForAdmin(url, appCtx)
 
     // console.log(dataset, "OrderDetail!!")
 

@@ -52,6 +52,8 @@ const OverviewSection = () => {
 
 const RenderSection = ({ item, appCtx }) => {
     let [counts, setCounts] = useState(null);
+    
+    let [getNewToken, setGetNewToken] = useState(false);
 
     const dataHandler = dataset => {
         if (dataset?.users) {
@@ -60,11 +62,39 @@ const RenderSection = ({ item, appCtx }) => {
             setCounts(dataset.products.length)
         } else if (dataset?.orders) {
             setCounts(dataset.orders.length)
+        } else if (dataset?.msg == "Authentication failed!! Invalid Token!!") {
+            setGetNewToken(true)
         }
     }
 
+    const updateUserDataWithNewToken = results => {
+        appCtx.handleUserData({accessToken: results.accessToken})
+        setGetNewToken(false)
+        // console.log(results, "RESULTS!!")
+        
+        if(results?.accessToken) {
+            readTokenProtectedDataFromServer(item.url, dataHandler, results.accessToken)
+        }
+    }
+
+    const fetchNewAccessToken = () => {
+        const endpoint = `${appCtx.baseUrl}/new-access-token`;
+        sendDataToServer(endpoint, {refreshToken: appCtx.user.refreshToken}, updateUserDataWithNewToken )
+    }
+
+    useEffect(() => {
+        getNewToken && fetchNewAccessToken()
+    }, [getNewToken])
+
+    const beginFetching = () => {
+        readTokenProtectedDataFromServer(item.url, dataHandler, appCtx.user.accessToken)
+    }
+
+    useEffect(() => {
+        beginFetching()
+    }, [])
+
     // readDataFromServer(item.url, dataHandler)
-    readTokenProtectedDataFromServer(item.url, dataHandler, appCtx.user.accessToken)
 
     return (
         <Link to={`/admin/${item.path}`}>
