@@ -84,8 +84,6 @@ const RenderCart = ({ cart, appCtx }) => {
 const RenderItemInCart = ({ item }) => {
     let { title, id, itemCount, itemPrice } = { ...item }
 
-    console.log(title, itemCount, itemPrice)
-
     return (
         <li key={title + id} className='flex gap-2 justify-center'>
             <div className='flex gap-6 items-center w-1/5'>

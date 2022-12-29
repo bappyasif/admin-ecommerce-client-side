@@ -15,6 +15,7 @@ import CheckoutPage from './components/routes/CheckoutPage';
 import CustomerLoginPage from './components/routes/CustomerLoginPage';
 import CustomerRegistrationPage from './components/routes/CustomerRegistrationPage';
 import LandingPage from './components/routes/LandingPage';
+import LogoutUser from './components/routes/LogoutUser';
 import ProductDetail from './components/routes/ProductDetail';
 import ProductsPage from './components/routes/ProductsPage';
 
@@ -33,7 +34,6 @@ function App() {
 
   const handleCart = (product, updatedData) => {
     setCart(prev => {
-      console.log(updatedData, "updatedData")
       let updateProductItemCount = null;
 
       if (updatedData.decrement) {
@@ -61,14 +61,13 @@ function App() {
     handleIsAdminTrue: handleIsAdminTrue
   }
 
-  console.log(cart, "Cart!")
-
   return (
     <AppContext.Provider value={contexts}>
       <div className="App">
         <MainNavigation />
         <Routes>
           <Route path='/' element={<LandingPage />} />
+          <Route path='/logout' element={<LogoutUser />} />
           <Route path='/login' element={<CustomerLoginPage />} />
           <Route path='/register' element={<CustomerRegistrationPage />} />
           <Route path='/products' element={<ProductsPage />} />

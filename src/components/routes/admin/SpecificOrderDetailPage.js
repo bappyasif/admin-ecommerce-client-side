@@ -13,8 +13,6 @@ function SpecificOrderDetailPage() {
 
     const { dataset } = useToFetchSectionSpecificDataForAdmin(url, appCtx)
 
-    // console.log(dataset, "OrderDetail!!")
-
     return (
         <div>
             <h2 className='text-4xl py-2 font-semibold bg-neutral-600 mb-4'>Order Detail</h2>

@@ -6,7 +6,7 @@ import { RenderFormControlFieldset, RenderFormSubmitButton } from "../CustomerLo
 
 function AdminPage() {
     const appCtx = useContext(AppContext);
-    console.log(appCtx?.user)
+
     return (
         <div>
             {
@@ -34,7 +34,9 @@ const AdminDashboard = () => {
 
 const OverviewSection = () => {
     const appCtx = useContext(AppContext);
+    
     const baseUrl = `${appCtx.baseUrl}`
+
     const sections = [
         { url: `${baseUrl}/all-orders`, text: "Total Orders", path: "all-orders", bgClr: "bg-lime-400" },
         { url: `${baseUrl}/all-products`, text: "Total Products", path: "all-products", bgClr: "bg-green-400" },
@@ -77,6 +79,7 @@ const RenderSection = ({ item, appCtx }) => {
         }
     }
 
+    // when access token expires, refetches new access token to keep getting access
     const fetchNewAccessToken = () => {
         const endpoint = `${appCtx.baseUrl}/new-access-token`;
         sendDataToServer(endpoint, {refreshToken: appCtx.user.refreshToken}, updateUserDataWithNewToken )
@@ -86,6 +89,7 @@ const RenderSection = ({ item, appCtx }) => {
         getNewToken && fetchNewAccessToken()
     }, [getNewToken])
 
+    // initial privilleged data fetching, with jwt access token
     const beginFetching = () => {
         readTokenProtectedDataFromServer(item.url, dataHandler, appCtx.user.accessToken)
     }

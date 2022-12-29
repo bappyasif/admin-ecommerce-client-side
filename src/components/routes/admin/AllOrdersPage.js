@@ -10,7 +10,6 @@ function AllOrdersPage() {
 
     const {dataset} = useToFetchSectionSpecificDataForAdmin(url, appCtx)
 
-    // console.log(dataset, "allorders")
     return (
         <div>
             <RenderAllOrdersList orders={dataset} />

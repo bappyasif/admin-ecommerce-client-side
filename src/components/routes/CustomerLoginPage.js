@@ -15,7 +15,6 @@ function CustomerLoginPage() {
 
     const handleLogin = (data) => {
         const url = `${appCtx.baseUrl}/access-tokens`;
-        // console.log(data?.user?.mobileNumber, "!!", data)
 
         sendDataToServer(url, {digits: `${data.user.mobileNumber}`}, handleJwt)
         
@@ -27,8 +26,6 @@ function CustomerLoginPage() {
         const url = `${appCtx.baseUrl}/login`;
         sendDataToServer(url, data, handleLogin)
     }
-
-    // console.log(appCtx.user, "logged USER!!")
 
     return (
         <div className='flex justify-center'>
@@ -48,8 +45,6 @@ const LoginForm = ({commenceLogin}) => {
     ];
 
     let renderFormControls = () => formControls.map(item => <RenderFormControlFieldset key={item.id} item={item} />)
-
-    // console.log(data, "form, data!!")
 
     const handleSubmit = (evt) => {
         evt.preventDefault();

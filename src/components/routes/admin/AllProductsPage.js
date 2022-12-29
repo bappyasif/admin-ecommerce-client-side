@@ -37,8 +37,6 @@ function AllProductsPage() {
     // console.log(dataset, "Products!!", data)
     return (
         <div>
-            {/* <h2>List Of All Products</h2> */}
-            {/* <RenderProducts dataset={dataset} /> */}
             <AddNewProduct handleAddProduct={handleAddProduct} />
             <RenderProducts dataset={data} handleRemoveProduct={handleRemoveProduct} />
         </div>

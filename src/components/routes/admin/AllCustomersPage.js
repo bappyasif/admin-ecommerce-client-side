@@ -15,8 +15,6 @@ function AllCustomersPage() {
 
     const { dataset } = useToFetchSectionSpecificDataForAdmin(url, appCtx)
 
-    console.log(dataset, "cutomerds!!")
-
     const handleData = () => {
         setData(dataset)
     }

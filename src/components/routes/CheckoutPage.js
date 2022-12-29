@@ -42,7 +42,6 @@ const MoveToNextStepInCheckout = ({ cost }) => {
     const handleShippingFormData = dataset => setShippingFormData(dataset)
 
     const handleCompleteOrder = (orders) => {
-        console.log(orders);
         appCtx.resetCart()
         navigate("/products")
     }
@@ -63,7 +62,6 @@ const MoveToNextStepInCheckout = ({ cost }) => {
                 alert("please fill out Shipping Form correctly")
             }
         } else if (whichStep === "Complete Order") {
-            // handleCompleteOrder()
             sendOrderRecordToServer()
         }
     }
@@ -98,12 +96,6 @@ const RenderShipingAddressForm = ({ updateFormData }) => {
 
     const userInputChangeHandler = (evt, whichElement) => {
         setFormData(prev => ({ ...prev, [whichElement]: evt.target.value }))
-    }
-
-    const handleSubmit = (evt) => {
-        evt.preventDefault()
-        console.log(formData, "form")
-        updateFormData(formData)
     }
 
     const formControls = [

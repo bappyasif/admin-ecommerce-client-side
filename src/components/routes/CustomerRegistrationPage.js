@@ -5,14 +5,11 @@ import { sendDataToServer } from '../fetchRequests';
 import { RenderFormControlFieldset, RenderFormSubmitButton } from './CustomerLoginPage'
 
 function CustomerRegistrationPage() {
-    // let [user, setUser] = useState({});
-
     const appCtx = useContext(AppContext);
 
     const navigate = useNavigate()
 
     const handleRegistration = (data) => {
-        // setUser(data)
         appCtx.handleUserData(data.user)
         navigate("/login");
     }
@@ -21,9 +18,6 @@ function CustomerRegistrationPage() {
         const url = `${appCtx.baseUrl}/register`;
         sendDataToServer(url, data, handleRegistration)
     }
-
-    // console.log(user, "Registered USER!!")
-    // console.log(appCtx.user, "Registered USER!!")
 
     return (
         <div className='flex justify-center'>
@@ -50,8 +44,6 @@ const RegistrationForm = ({ commenceRegistration }) => {
         evt.preventDefault();
         commenceRegistration(data)
     }
-
-    // console.log(data)
 
     return (
         <form
