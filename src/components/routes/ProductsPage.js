@@ -6,7 +6,7 @@ import { useToFetchDataFromServer } from '../hooks'
 function ProductsPage() {
     const appCtx = useContext(AppContext);
 
-    const url = `${appCtx.baseUrl}/all-products`
+    const url = `${appCtx.baseUrl}/products`
 
     let { data } = useToFetchDataFromServer(url)
 

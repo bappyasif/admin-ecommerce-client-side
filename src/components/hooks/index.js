@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react"
-import { AppContext } from "../../App"
-import { readDataFromServer } from "../fetchRequests"
+import { useEffect, useState } from "react"
+import { readDataFromServer, readTokenProtectedDataFromServer } from "../fetchRequests"
 
 const useToFetchDataFromServer = (endpoint) => {
     let [data, setData] = useState(null)
@@ -20,7 +19,7 @@ const useToFetchDataFromServer = (endpoint) => {
     return { data }
 }
 
-const useToFetchSectionSpecificDataForAdmin = (url) => {
+const useToFetchSectionSpecificDataForAdmin = (url, appCtx) => {
     const [dataset, setDataset] = useState()
 
     const handleDataset = (results) => {
@@ -40,7 +39,8 @@ const useToFetchSectionSpecificDataForAdmin = (url) => {
     }
 
     const beginFetching = () => {
-        readDataFromServer(url, handleDataset)
+        readTokenProtectedDataFromServer(url, handleDataset, appCtx.user.accessToken)
+        // readDataFromServer(url, handleDataset)
     }
 
     useEffect(() => {

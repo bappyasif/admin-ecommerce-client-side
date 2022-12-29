@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../../App';
-import { readDataFromServer, sendDataToServer } from '../../fetchRequests';
+import { readTokenProtectedDataFromServer, sendDataToServer } from '../../fetchRequests';
 import { RenderFormControlFieldset, RenderFormSubmitButton } from "../CustomerLoginPage"
 
 function AdminPage() {
     const appCtx = useContext(AppContext);
-
+    console.log(appCtx?.user)
     return (
         <div>
             {
@@ -41,7 +41,7 @@ const OverviewSection = () => {
         { url: `${baseUrl}/all-customers`, text: "Total Customers", path: "all-customers", bgClr: "bg-emerald-400" },
     ];
 
-    let renderSections = () => sections.map(section => <RenderSection key={section.text} item={section} />)
+    let renderSections = () => sections.map(section => <RenderSection key={section.text} item={section} appCtx={appCtx} />)
 
     return (
         <div className='flex justify-around w-full gap-10'>
@@ -50,7 +50,7 @@ const OverviewSection = () => {
     )
 }
 
-const RenderSection = ({ item }) => {
+const RenderSection = ({ item, appCtx }) => {
     let [counts, setCounts] = useState(null);
 
     const dataHandler = dataset => {
@@ -63,7 +63,8 @@ const RenderSection = ({ item }) => {
         }
     }
 
-    readDataFromServer(item.url, dataHandler)
+    // readDataFromServer(item.url, dataHandler)
+    readTokenProtectedDataFromServer(item.url, dataHandler, appCtx.user.accessToken)
 
     return (
         <Link to={`/admin/${item.path}`}>
@@ -90,6 +91,13 @@ const AdminLoginForm = ({ appCtx }) => {
 
     const navigate = useNavigate()
 
+    const checkIfUserIsLoggedIn = () => {
+        if(!appCtx?.user?.accessToken) {
+            alert("You are not logged in, you need to be logged in :)")
+            navigate("/login")
+        }
+    }
+
     const userInputChangeHandler = evt => setAdminSecret(evt.target.value)
 
     const formControls = [
@@ -115,6 +123,10 @@ const AdminLoginForm = ({ appCtx }) => {
         evt.preventDefault()
         handleAdminAccess()
     }
+
+    useEffect(() => {
+        checkIfUserIsLoggedIn()
+    }, [])
 
     let renderFormControls = () => formControls.map(item => <RenderFormControlFieldset key={item.id} item={item} />)
 

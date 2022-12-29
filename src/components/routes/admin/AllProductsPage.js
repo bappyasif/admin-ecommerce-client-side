@@ -13,7 +13,7 @@ function AllProductsPage() {
 
     const url = `${appCtx.baseUrl}/all-products`;
 
-    const { dataset } = useToFetchSectionSpecificDataForAdmin(url)
+    const { dataset } = useToFetchSectionSpecificDataForAdmin(url, appCtx)
 
     const handleData = () => {
         setData(dataset)

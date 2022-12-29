@@ -8,7 +8,7 @@ function AllOrdersPage() {
     
     const url = `${appCtx.baseUrl}/all-orders`;
 
-    const {dataset} = useToFetchSectionSpecificDataForAdmin(url)
+    const {dataset} = useToFetchSectionSpecificDataForAdmin(url, appCtx)
 
     // console.log(dataset, "allorders")
     return (

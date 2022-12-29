@@ -13,7 +13,7 @@ function AllCustomersPage() {
 
     const url = `${appCtx.baseUrl}/all-customers`;
 
-    const { dataset } = useToFetchSectionSpecificDataForAdmin(url)
+    const { dataset } = useToFetchSectionSpecificDataForAdmin(url, appCtx)
 
     console.log(dataset, "cutomerds!!")
 
