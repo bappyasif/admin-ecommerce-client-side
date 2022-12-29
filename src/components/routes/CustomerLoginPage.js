@@ -72,7 +72,7 @@ export const RenderFormControlFieldset = ({ item }) => {
     return (
         <fieldset className='my-6'>
             <label 
-                className='block text-gray-700 text-lg font-bold mb-2 text-justify'
+                className='block text-gray-700 text-lg font-bold mb-2 text-justify before:content-["*"] before:mr-2'
                 htmlFor={item.id}
             >{item.label}</label>
             <input
