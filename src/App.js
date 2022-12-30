@@ -49,8 +49,8 @@ function App() {
   const resetCart = () => setCart({})
 
   const contexts = {
-    baseUrl: "http://localhost:4000",
-    // baseUrl: "https://smiling-gilet-newt.cyclic.app/",
+    // baseUrl: "http://localhost:4000",
+    baseUrl: "https://smiling-gilet-newt.cyclic.app/",
     user: user,
     handleUserData: handleUserData,
     cart: cart,

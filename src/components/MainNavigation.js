@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import { MdHome, MdInventory, MdLockOpen, MdAppRegistration, MdAdminPanelSettings } from "react-icons/md"
+import { MdHome, MdInventory, MdLockOpen, MdAppRegistration, MdAdminPanelSettings, MdInventory2, MdLock } from "react-icons/md"
 import { AppContext } from '../App';
 import { useToCloseModalOnClickedOutside } from './hooks';
 // menus for unauthenticated users
@@ -16,7 +16,7 @@ const menusGroupEen = [
 const menusGroupTwee = [
     { name: "Home", icon: <MdHome />, path: "/" },
     { name: "Products", icon: <MdInventory />, path: "/products" },
-    { name: "Admin", icon: null, path: "/admin" }
+    { name: "Admin", icon: <MdAdminPanelSettings />, path: "/admin" }
 ];
 
 function MainNavigation() {
@@ -61,8 +61,8 @@ const LoggedInUserSettings = () => {
     const ref = useRef()
 
     const menuOptionsList = [
-        { name: "Products", path: "/products", icon: null },
-        { name: "Logout", path: "/logout", icon: null },
+        { name: "Products", path: "/products", icon: <MdInventory2 /> },
+        { name: "Logout", path: "/logout", icon: <MdLock /> },
     ];
 
     const handleToggleDropdown = () => setShowMenu(prev => !prev)
@@ -113,11 +113,12 @@ const RenderDropdownOption = ({ item, handleCloseDropdown }) => {
             onClick={clickHandler}
         >
             <a
-                class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap
+                class="flex gap-2 items-center text-sm py-2 px-2 font-normal w-full whitespace-nowrap
                        bg-transparent text-gray-700 hover:bg-gray-100 "
                 href="#"
             >
-                {item.name}
+                <span>{item.icon}</span>
+                <span>{item.name}</span>
             </a>
         </li>
     )
